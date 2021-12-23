@@ -1,0 +1,31 @@
+name: Create or update milestone-renovate branch
+
+on:
+  push:
+    branches:
+      - main
+  delete:
+    branches:
+      - milestone-renovate
+
+jobs:
+  create-or-update-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Create or update milestone-renovate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DEFAULT_BRANCH='main'
+          BRANCH_NAME='milestone-renovate'
+          if [ ! "$(git branch -a --format="%(refname:short)" | grep -e ^${BRANCH_NAME}$)" ] ; then
+            git checkout -b ${BRANCH_NAME}
+            git push origin ${BRANCH_NAME}
+          else
+            git checkout ${BRANCH_NAME}
+            git rebase ${DEFAULT_BRANCH}
+            git push -f origin ${BRANCH_NAME}
+          fi
