@@ -13,6 +13,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - env:
+          GITHUB_EVENT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_EVENT"
       - name: Create milestone-renovate
         if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
         run: echo 'Create milestone-renovate'
