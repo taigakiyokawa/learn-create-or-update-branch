@@ -2,7 +2,7 @@ name: Create or update milestone-renovate branch
 
 on:
   push:
-    branch:
+    branches:
       - main
   delete:
 
