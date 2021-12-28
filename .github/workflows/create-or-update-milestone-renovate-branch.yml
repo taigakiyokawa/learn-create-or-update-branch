@@ -14,17 +14,17 @@ jobs:
         with:
           fetch-depth: 0
       - name: Create or update milestone-renovate
+        if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        - if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
-            run: |
-              DEFAULT_BRANCH='main'
-              BRANCH_NAME='milestone-renovate'
-              if [ ! "$(git branch -a --format="%(refname:short)" | grep -e ^${BRANCH_NAME}$)" ] ; then
-                git checkout -b ${BRANCH_NAME}
-                git push origin ${BRANCH_NAME}
-              else
-                git checkout ${BRANCH_NAME}
-                git rebase ${DEFAULT_BRANCH}
-                git push -f origin ${BRANCH_NAME}
-              fi
+        run: |
+          DEFAULT_BRANCH='main'
+          BRANCH_NAME='milestone-renovate'
+          if [ ! "$(git branch -a --format="%(refname:short)" | grep -e ^${BRANCH_NAME}$)" ] ; then
+            git checkout -b ${BRANCH_NAME}
+            git push origin ${BRANCH_NAME}
+          else
+            git checkout ${BRANCH_NAME}
+            git rebase ${DEFAULT_BRANCH}
+            git push -f origin ${BRANCH_NAME}
+          fi
