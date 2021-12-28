@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  delete:
+  delete
 
 jobs:
   create-or-update-branch:
@@ -17,9 +17,11 @@ jobs:
       - env:
           GITHUB_EVENT: ${{ toJSON(github) }}
         run: echo "$GITHUB_EVENT"
+
       - name: Create milestone-renovate
         if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
         run: echo 'Create milestone-renovate'
+
       - name: Update milestone-renovate
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        if: ${{ github.event_name == 'push'}}
         run: echo 'Update milestone-renovate'
