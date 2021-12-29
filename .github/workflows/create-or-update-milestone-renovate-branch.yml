@@ -7,6 +7,7 @@ on:
   delete:
 
 jobs:
+  if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
   create-or-update-branch:
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +16,6 @@ jobs:
           fetch-depth: 0
 
       - name: Create or update milestone-renovate
-        if: ${{ github.event_name == 'push' || github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
