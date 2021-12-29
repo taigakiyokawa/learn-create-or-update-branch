@@ -7,8 +7,8 @@ on:
   delete:
 
 jobs:
-  if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
   create-or-update-branch:
+    if: ${{ github.event.ref_type == 'branch' && github.event.ref == 'milestone-renovate' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
