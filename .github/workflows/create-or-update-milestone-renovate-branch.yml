@@ -26,6 +26,6 @@ jobs:
             git push origin ${BRANCH_NAME}
           else
             git checkout ${BRANCH_NAME}
-            git rebase ${DEFAULT_BRANCH}
-            git push -f origin ${BRANCH_NAME}
+            git pull origin ${DEFAULT_BRANCH}
+            git push origin ${BRANCH_NAME}
           fi
