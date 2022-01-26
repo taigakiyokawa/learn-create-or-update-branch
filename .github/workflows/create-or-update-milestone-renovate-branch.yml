@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DEFAULT_BRANCH='main'
+          DEFAULT_BRANCH='release'
           BRANCH_NAME='milestone-renovate'
           if [ ! "$(git branch -a --format="%(refname:short)" | grep -e ^${BRANCH_NAME}$)" ] ; then
             git checkout -b ${BRANCH_NAME}
