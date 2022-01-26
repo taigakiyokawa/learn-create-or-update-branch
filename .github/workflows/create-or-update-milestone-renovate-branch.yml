@@ -22,10 +22,11 @@ jobs:
           DEFAULT_BRANCH='release'
           BRANCH_NAME='milestone-renovate'
           if [ ! "$(git branch -a --format="%(refname:short)" | grep -e ^${BRANCH_NAME}$)" ] ; then
-            git checkout -b milestone-renovate
-            git push origin milestone-renovate
+            git checkout ${DEFAULT_BRANCH}
+            git checkout -b ${BRANCH_NAME}
+            git push origin ${BRANCH_NAME}
           else
-            git checkout milestone-renovate
-            git rebase relase
-            git push -f origin milestone-renovate
+            git checkout ${BRANCH_NAME}
+            git rebase ${DEFAULT_BRANCH}
+            git push -f origin ${BRANCH_NAME}
           fi
