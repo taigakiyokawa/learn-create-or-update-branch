@@ -3,7 +3,7 @@ name: Create or update milestone-renovate branch
 on:
   push:
     branches:
-      - main
+      - release
   delete:
 
 jobs:
@@ -22,7 +22,6 @@ jobs:
           DEFAULT_BRANCH='release'
           BRANCH_NAME='milestone-renovate'
           if [ ! "$(git branch -a --format="%(refname:short)" | grep -e ^${BRANCH_NAME}$)" ] ; then
-            git checkout ${DEFAULT_BRANCH}
             git checkout -b ${BRANCH_NAME}
             git push origin ${BRANCH_NAME}
           else
